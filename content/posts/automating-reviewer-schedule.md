@@ -124,6 +124,10 @@ jobs:
 - **Daily Schedule**: The workflow runs every day at 00:00 UTC (07:00 GMT+7) to ensure the assignments are ready before the workday starts.
 - **Manual Trigger**: The workflow_dispatch event allows us to run the workflow manually. This is especially useful for the first-time setup or any urgent reassignments during the month.
 
+## Results
+
+![End result](/automating-reviewer-schedule-1.png)
+
 ## Benefits
 
 - **Time-Saving**: Automating this process saves us from the repetitive and error-prone task of manual assignments in Excel.
