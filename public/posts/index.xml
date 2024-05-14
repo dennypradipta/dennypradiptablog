@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Denny Pradipta&#39;s Blog</title>
+    <link>http://localhost:1313/posts/</link>
+    <description>Recent content in Posts on Denny Pradipta&#39;s Blog</description>
+    <generator>Hugo 0.125.2</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 14 May 2024 15:55:00 +0700</lastBuildDate>
+    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Automating Reviewer Assignments for NEO Sense and Monika</title>
+      <link>http://localhost:1313/posts/automating-reviewer-schedule/</link>
+      <pubDate>Tue, 14 May 2024 15:55:00 +0700</pubDate>
+      <guid>http://localhost:1313/posts/automating-reviewer-schedule/</guid>
+      <description>In Hyperjump, we handle two main projects: NEO Sense and Monika. Each day, we get assigned to review pull requests for these projects. To ensure fairness and randomness, at the start of every month, our team lead randomize the assignments, making sure each project has two reviewers, and no one is assigned to both projects on the same day. Our team lead used to manage this process manually in Excel, which was a pain the ass I&amp;rsquo;m sure.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,15 @@
+baseURL = 'https://dennypradiptablog.vercel.app'
+languageCode = 'en-us'
+title = "Denny Pradipta's Blog"
+theme = 'paper'
+
+[params]
+  # header social icons
+  twitter = 'dennypradipta_'               # twitter.com/YOUR_TWITTER_ID
+  github = 'dennypradipta'                 # github.com/YOUR_GITHUB_ID
+  linkedin = 'dennypradipta'             # linkedin.com/in/YOUR_LINKEDIN_ID
+  rss = true                                # show rss icon
+
+  avatar = 'denny.aditya.p@gmail.com'
+  name = 'Denny Pradipta'
+  bio = 'Software Engineer in South Jakarta, Indonesia'

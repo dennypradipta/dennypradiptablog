@@ -1,0 +1,477 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en-us"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Automating Reviewer Assignments for NEO Sense and Monika - Denny Pradipta&#39;s Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="In Hyperjump, we handle two main projects: NEO Sense and Monika. Each day, we get assigned to review pull requests for these projects. To ensure fairness and randomness, at the start of every month, our team lead randomize the assignments, making sure each project has two reviewers, and no one is assigned to both projects on the same day. Our team lead used to manage this process manually in Excel, which was a pain the ass I&rsquo;m sure." />
+  <meta name="author" content="Denny Pradipta" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://www.gravatar.com/avatar/ff5b63b23c720aa45589e3ef304c4936?s=160&amp;d=identicon" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/twitter.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/github.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/linkedin.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/rss.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link rel="icon" href="http://localhost:1313/favicon.ico" />
+  <link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.125.2">
+
+  
+  
+  
+  
+  
+
+
+  
+  
+  <meta itemprop="name" content="Automating Reviewer Assignments for NEO Sense and Monika">
+  <meta itemprop="description" content="In Hyperjump, we handle two main projects: NEO Sense and Monika. Each day, we get assigned to review pull requests for these projects. To ensure fairness and randomness, at the start of every month, our team lead randomize the assignments, making sure each project has two reviewers, and no one is assigned to both projects on the same day. Our team lead used to manage this process manually in Excel, which was a pain the ass I&rsquo;m sure.">
+  <meta itemprop="datePublished" content="2024-05-14T15:55:00+07:00">
+  <meta itemprop="dateModified" content="2024-05-14T15:55:00+07:00">
+  <meta itemprop="wordCount" content="614">
+  <meta itemprop="image" content="http://localhost:1313/automating-reviewer-schedule.webp">
+  
+  <meta property="og:url" content="http://localhost:1313/posts/automating-reviewer-schedule/">
+  <meta property="og:site_name" content="Denny Pradipta&#39;s Blog">
+  <meta property="og:title" content="Automating Reviewer Assignments for NEO Sense and Monika">
+  <meta property="og:description" content="In Hyperjump, we handle two main projects: NEO Sense and Monika. Each day, we get assigned to review pull requests for these projects. To ensure fairness and randomness, at the start of every month, our team lead randomize the assignments, making sure each project has two reviewers, and no one is assigned to both projects on the same day. Our team lead used to manage this process manually in Excel, which was a pain the ass I&amp;rsquo;m sure.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+  <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-05-14T15:55:00+07:00">
+    <meta property="article:modified_time" content="2024-05-14T15:55:00+07:00">
+    <meta property="og:image" content="http://localhost:1313/automating-reviewer-schedule.webp">
+
+  
+  <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://localhost:1313/automating-reviewer-schedule.webp"><meta name="twitter:title" content="Automating Reviewer Assignments for NEO Sense and Monika">
+<meta name="twitter:description" content="In Hyperjump, we handle two main projects: NEO Sense and Monika. Each day, we get assigned to review pull requests for these projects. To ensure fairness and randomness, at the start of every month, our team lead randomize the assignments, making sure each project has two reviewers, and no one is assigned to both projects on the same day. Our team lead used to manage this process manually in Excel, which was a pain the ass I&rsquo;m sure.">
+
+  
+  
+  
+  <link rel="canonical" href="http://localhost:1313/posts/automating-reviewer-schedule/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="http://localhost:1313/"
+      >Denny Pradipta&#39;s Blog</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/dennypradipta_"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/dennypradipta"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/dennypradipta"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./rss.svg)"
+        href="http://localhost:1313/index.xml"
+        target="_blank"
+        rel="alternate"
+      >
+        rss
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">Automating Reviewer Assignments for NEO Sense and Monika</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>May 14, 2024</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><p>In Hyperjump, we handle two main projects: <a href="https://neosense.bgnlab.id">NEO Sense</a> and <a href="https://github.com/hyperjumptech/monika">Monika</a>. Each day, we get assigned to review pull requests for these projects. To ensure fairness and randomness, at the start of every month, our team lead randomize the assignments, making sure each project has two reviewers, and no one is assigned to both projects on the same day. Our team lead used to manage this process manually in Excel, which was a pain the ass I&rsquo;m sure.</p>
+<p>To automate this task, I created a script that handles the randomization and assignment process, and then sends the results to Microsoft Teams using a webhook.</p>
+<h2 id="the-script">The script</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;node:crypto&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Add more reviewers here
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">reviewers</span> <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Budhi Widagdo&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Denny Pradipta&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Hari Cahya Nugraha&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Kevin Hermawan&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Lukman Adisaputro&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Muslim Ilmiawan&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Raosan Fikri Lillahi&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Sinta Herena&#34;</span>,
+</span></span><span style="display:flex;"><span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">async</span> () =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Generate random number
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">rand</span>(<span style="color:#a6e22e">min</span>, <span style="color:#a6e22e">max</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>      (<span style="color:#a6e22e">min</span> <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>        ((<span style="color:#a6e22e">max</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">min</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">getRandomValues</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Uint32Array</span>(<span style="color:#ae81ff">1</span>))[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">/</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#ae81ff">2</span> <span style="color:#f92672">**</span> <span style="color:#ae81ff">32</span>) <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Create the placeholders
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">selected</span> <span style="color:#f92672">=</span> [];
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">results</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">monika</span><span style="color:#f92672">:</span> [],
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">symon</span><span style="color:#f92672">:</span> [],
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Select the reviewers
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">do</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">selectedIndex</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">rand</span>(<span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">reviewers</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">selected</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#a6e22e">selectedIndex</span>)) {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">info</span>(<span style="color:#e6db74">&#34;Selected&#34;</span>, <span style="color:#a6e22e">reviewers</span>[<span style="color:#a6e22e">selectedIndex</span>]);
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">selected</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">selectedIndex</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">while</span> (<span style="color:#a6e22e">selected</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">4</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Assign reviewers to the projects
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">index</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">selected</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">results</span>.<span style="color:#a6e22e">monika</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">info</span>(<span style="color:#e6db74">&#34;Added&#34;</span>, <span style="color:#a6e22e">reviewers</span>[<span style="color:#a6e22e">index</span>], <span style="color:#e6db74">&#34;as a Monika Reviewer&#34;</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">results</span>.<span style="color:#a6e22e">monika</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">reviewers</span>[<span style="color:#a6e22e">index</span>]);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">info</span>(<span style="color:#e6db74">&#34;Added&#34;</span>, <span style="color:#a6e22e">reviewers</span>[<span style="color:#a6e22e">index</span>], <span style="color:#e6db74">&#34;as a Symon Reviewer&#34;</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">results</span>.<span style="color:#a6e22e">symon</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">reviewers</span>[<span style="color:#a6e22e">index</span>]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Create a teams message
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">TEAMS_WEBHOOK_URL</span>, {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;POST&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">headers</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;Content-Type&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;application/json&#34;</span>,
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>({
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">title</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Monika and Symon Reviewers&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">summary</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Here are the assigned reviewers for Monika and Symon today.&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">text</span><span style="color:#f92672">:</span> <span style="color:#e6db74">`Here are the assigned reviewers for Monika and Symon today:\n\n\n**Monika**: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">results</span>.<span style="color:#a6e22e">monika</span>.<span style="color:#a6e22e">join</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;, &#34;</span>
+</span></span><span style="display:flex;"><span>      )<span style="color:#e6db74">}</span><span style="color:#e6db74">\n\n**Symon**: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">results</span>.<span style="color:#a6e22e">symon</span>.<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#34;, &#34;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">\n`</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">themeColor</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;#309942&#34;</span>,
+</span></span><span style="display:flex;"><span>    }),
+</span></span><span style="display:flex;"><span>  }).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">response</span>) =&gt; <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>());
+</span></span><span style="display:flex;"><span>})();
+</span></span></code></pre></div><h3 id="how-it-works">How it Works</h3>
+<ul>
+<li><strong>Random Reviewer Selection</strong>: The script uses the Node.js crypto module to generate random numbers, ensuring the selection process is truly random.</li>
+<li><strong>Assignment Logic</strong>: It then selects four unique reviewers from the list. The first two are assigned to Monika, and the next two to Symon.</li>
+<li><strong>Notification</strong>: The script formats the assignment results and sends a message to our Microsoft Teams channel using a webhook, keeping everyone informed.</li>
+</ul>
+<h2 id="the-github-workflow">The GitHub Workflow</h2>
+<p>To run this script daily, I use a GitHub Workflow scheduled to execute at midnight UTC every day, which is 07:00 GMT+7 in Indonesia. This timing is perfect as it runs just before the workday starts. However, for the initial setup, since the script was created at 10 AM, I need to be able to trigger it manually as well.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">name</span>: <span style="color:#ae81ff">Run Node.js script daily</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">on</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">schedule</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">cron</span>: <span style="color:#e6db74">&#34;0 0 * * *&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">workflow_dispatch</span>:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">jobs</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">run-script</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">runs-on</span>: <span style="color:#ae81ff">ubuntu-latest</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">env</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">TEAMS_WEBHOOK_URL</span>: <span style="color:#ae81ff">${{ secrets.TEAMS_WEBHOOK_URL }}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">steps</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Checkout repository</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/checkout@v3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Set up Node.js</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/setup-node@v3</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">with</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">node-version</span>: <span style="color:#e6db74">&#34;20&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Run script</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: <span style="color:#ae81ff">node index.js</span>
+</span></span></code></pre></div><h3 id="triggers-for-the-workflow">Triggers for the Workflow</h3>
+<ul>
+<li><strong>Daily Schedule</strong>: The workflow runs every day at 00:00 UTC (07:00 GMT+7) to ensure the assignments are ready before the workday starts.</li>
+<li><strong>Manual Trigger</strong>: The workflow_dispatch event allows us to run the workflow manually. This is especially useful for the first-time setup or any urgent reassignments during the month.</li>
+</ul>
+<h2 id="benefits">Benefits</h2>
+<ul>
+<li><strong>Time-Saving</strong>: Automating this process saves us from the repetitive and error-prone task of manual assignments in Excel.</li>
+<li><strong>Fairness</strong>: Randomizing assignments ensures a fair distribution of review tasks among team members.</li>
+<li><strong>Transparency</strong>: By using Microsoft Teams, no one gets left behind and keeps everyone in the loop.</li>
+</ul>
+<p>This script and workflow setup have significantly simplified our daily review assignment process, allowing the team to focus more on core development tasks rather than administrative overhead.</p>
+</section>
+
+  
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2024
+    <a class="link" href="http://localhost:1313/">Denny Pradipta&#39;s Blog</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>
