@@ -90,6 +90,8 @@
   {{ template "_internal/opengraph.html" . }}
   <!---->
   {{ template "_internal/twitter_cards.html" . }}
+  <!---->
+  {{- template "partials/cookie-consent.html" . }}
   <!-- RSS -->
   {{ range .AlternativeOutputFormats }}
   <link
