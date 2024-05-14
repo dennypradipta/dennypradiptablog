@@ -1,7 +1,6 @@
 +++
 title = 'Automating Reviewer Assignments for NEO Sense and Monika'
 date = 2024-05-14T15:55:00+07:00
-draft = true
 images = ['/automating-reviewer-schedule.webp']
 +++
 
