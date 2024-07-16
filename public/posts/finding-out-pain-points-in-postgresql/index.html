@@ -1,0 +1,399 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en-us"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Finding Out Pain Points in Postgresql using pg_stat_statements - Denny Pradipta&#39;s Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Alright, let&rsquo;s face it: as much as we love PostgreSQL, it can sometimes feel like finding the source of your database&rsquo;s performance issues is like finding a needle in a haystack. But what if I told you there&rsquo;s an extension in your PostgreSQL toolbox that can help you identify and fix these pain points? Enter pg_stat_statements.
+What is pg_stat_statements? It&rsquo;s an extension that collects and displays statistics about SQL queries executed by your database." />
+  <meta name="author" content="Denny Pradipta" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://www.gravatar.com/avatar/ff5b63b23c720aa45589e3ef304c4936?s=160&amp;d=identicon" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/twitter.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/github.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/linkedin.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/rss.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link rel="icon" href="http://localhost:1313/favicon.ico" />
+  <link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.125.2">
+
+  
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="http://localhost:1313/"
+      >Denny Pradipta&#39;s Blog</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/dennypradipta_"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/dennypradipta"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/dennypradipta"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./rss.svg)"
+        href="http://localhost:1313/index.xml"
+        target="_blank"
+        rel="alternate"
+      >
+        rss
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">Finding Out Pain Points in Postgresql using pg_stat_statements</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Jul 16, 2024</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><p>Alright, let&rsquo;s face it: as much as we love PostgreSQL, it can sometimes feel like finding the source of your database&rsquo;s performance issues is like finding a needle in a haystack. But what if I told you there&rsquo;s an extension in your PostgreSQL toolbox that can help you identify and fix these pain points? Enter <strong>pg_stat_statements</strong>.</p>
+<h2 id="what-is-pg_stat_statements">What is pg_stat_statements?</h2>
+<p>It&rsquo;s an extension that collects and displays statistics about SQL queries executed by your database. It will show you which queries are causing trouble and need your attention.</p>
+<h2 id="getting-started">Getting Started</h2>
+<p>First things first, you need to enable the pg_stat_statements extension. Here’s how you do it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> EXTENSION pg_stat_statements;
+</span></span></code></pre></div><p>Then, update your postgresql.conf. It is usually located in /etc/postgresql/(version)/main/postgresql.conf.Add the following line to your postgresql.conf file:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>shared_preload_libraries = &#39;pg_stat_statements&#39;
+</span></span><span style="display:flex;"><span>log_statement = &#39;all&#39;
+</span></span><span style="display:flex;"><span>log_min_duration_statement = 0
+</span></span></code></pre></div><p>You’ll need to restart your PostgreSQL server for the changes to take effect.</p>
+<h2 id="finding-the-culprit">Finding the Culprit</h2>
+<p>Once you’ve got pg_stat_statements up and running, it’s time to uncover those pesky queries that are slowing things down. Here’s a handy query to get you started:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span>
+</span></span><span style="display:flex;"><span>    query,
+</span></span><span style="display:flex;"><span>    calls,
+</span></span><span style="display:flex;"><span>    total_exec_time,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rows</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">100</span>.<span style="color:#ae81ff">0</span> <span style="color:#f92672">*</span> shared_blks_hit <span style="color:#f92672">/</span> <span style="color:#66d9ef">nullif</span>(shared_blks_hit <span style="color:#f92672">+</span> shared_blks_read, <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">AS</span> hit_percent,
+</span></span><span style="display:flex;"><span>    mean_exec_time
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> pg_stat_statements
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> mean_exec_time <span style="color:#66d9ef">DESC</span>;
+</span></span></code></pre></div><p>(I got it from <a href="https://www.timescale.com/learn/postgresql-extensions-pg-stat-statements">here</a>, just modified it a bit)</p>
+<p>This query retrieves various statistics about SQL statements from the pg_stat_statements view. Here’s what each part does:</p>
+<ol>
+<li>
+<p><code>query</code>: This column shows the SQL statement that was executed. It&rsquo;s essential for identifying which queries are being analyzed.</p>
+</li>
+<li>
+<p><code>calls</code>: This column indicates how many times the query has been executed. A high number of calls can show which queries are run frequently and may be contributing significantly to the overall load on the database.</p>
+</li>
+<li>
+<p><code>total_exec_time</code>: This column gives the total time spent executing the query, in milliseconds. It’s useful for understanding the cumulative impact of the query on the database’s performance.</p>
+</li>
+<li>
+<p><code>rows</code>: This column shows the total number of rows retrieved or affected by the query. It helps in understanding the scale of the query&rsquo;s impact.</p>
+</li>
+<li>
+<p><code>hit_percent</code>: This calculated column shows the percentage of times a shared block was found in the buffer cache (a &ldquo;cache hit&rdquo;) rather than having to be read from disk. It’s computed as:</p>
+</li>
+<li>
+<p><code>100.0 * shared_blks_hit / nullif(shared_blks_hit + shared_blks_read, 0)</code>: The nullif function is used to avoid division by zero. A higher percentage means better performance, as accessing data in memory is much faster than reading from disk.</p>
+</li>
+<li>
+<p><code>mean_exec_time</code>: This column shows the average time spent executing the query, in milliseconds.</p>
+</li>
+</ol>
+<p>Because I use <a href="https://www.metabase.com">Metabase</a>, I can just visually see the table. Metabase makes it easy to sort, filter, and visualize the data, turning what could be a complex analysis into a few clicks. So, instead of digging through raw data, I get a clear picture of what’s going on with my database.</p>
+<p><img src="/finding-out-pain-points-in-postgresql-1.png" alt="Metabase Dashboard"></p>
+<h2 id="taking-action">Taking Action</h2>
+<p>Identifying the slow queries is just the first step. Now, you need to roll up your sleeves and optimize them. Here are a few common tactics:</p>
+<ol>
+<li>Indexing: Make sure your queries are using indexes effectively. Sometimes, a well-placed index can turn a slow crawl into a speedy sprint.</li>
+<li>Query Optimization: Rewrite your queries for better performance. Sometimes just rephrasing can make all the difference.</li>
+<li>Vacuuming: Regular maintenance tasks like vacuuming and analyzing your tables can help keep things running smoothly.</li>
+</ol>
+<p>In my case, I forgot to index a few columns. <em>Oopsies</em>.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Using pg_stat_statements is helpful to identify performance issues. It helps you pinpoint the exact queries that are causing the most pain, allowing you to take targeted action to improve your database&rsquo;s performance. So next time your PostgreSQL feels sluggish, give it a try.</p>
+<p>And remember, if all else fails, there’s always coffee. Lots of coffee.</p>
+</section>
+
+  
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="http://localhost:1313/posts/automating-reviewer-schedule/"
+      ><span>Automating Reviewer Assignments for NEO Sense and Monika</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2024
+    <a class="link" href="http://localhost:1313/">Denny Pradipta&#39;s Blog</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

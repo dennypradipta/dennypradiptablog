@@ -6,8 +6,15 @@
     <description>Recent content on Denny Pradipta&#39;s Blog</description>
     <generator>Hugo 0.125.2</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 14 May 2024 15:55:00 +0700</lastBuildDate>
+    <lastBuildDate>Tue, 16 Jul 2024 15:10:04 +0700</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Finding Out Pain Points in Postgresql using pg_stat_statements</title>
+      <link>http://localhost:1313/posts/finding-out-pain-points-in-postgresql/</link>
+      <pubDate>Tue, 16 Jul 2024 15:10:04 +0700</pubDate>
+      <guid>http://localhost:1313/posts/finding-out-pain-points-in-postgresql/</guid>
+      <description>Alright, let&amp;rsquo;s face it: as much as we love PostgreSQL, it can sometimes feel like finding the source of your database&amp;rsquo;s performance issues is like finding a needle in a haystack. But what if I told you there&amp;rsquo;s an extension in your PostgreSQL toolbox that can help you identify and fix these pain points? Enter pg_stat_statements.&#xA;What is pg_stat_statements? It&amp;rsquo;s an extension that collects and displays statistics about SQL queries executed by your database.</description>
+    </item>
     <item>
       <title>Automating Reviewer Assignments for NEO Sense and Monika</title>
       <link>http://localhost:1313/posts/automating-reviewer-schedule/</link>
