@@ -1,0 +1,472 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en-us"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>So That&#39;s How You Do MongoDB Replication! - Denny Pradipta&#39;s Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="When I first joined Indorelawan as a fresh-faced graduate, I had my fair share of battles with MongoDB replication. We had two servers: one for the primary and one for the secondary. Simple, right? Well, not so much. Every time the secondary server decided to take a nap, the primary would throw in the towel too. It was a complete disaster, and I’ll admit&ndash;I got so frustrated that I just ripped the replication feature out entirely (not my proudest moment, but hey, desperate times)." />
+  <meta name="author" content="Denny Pradipta" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://www.gravatar.com/avatar/ff5b63b23c720aa45589e3ef304c4936?s=160&amp;d=identicon" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/twitter.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/github.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/linkedin.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/rss.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link rel="icon" href="http://localhost:1313/favicon.ico" />
+  <link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.125.2">
+
+  
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="http://localhost:1313/"
+      >Denny Pradipta&#39;s Blog</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/dennypradipta_"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/dennypradipta"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/dennypradipta"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./rss.svg)"
+        href="http://localhost:1313/index.xml"
+        target="_blank"
+        rel="alternate"
+      >
+        rss
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">So That&#39;s How You Do MongoDB Replication!</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Aug 13, 2024</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><p>When I first joined <a href="https://www.indorelawan.org">Indorelawan</a> as a fresh-faced graduate, I had my fair share of battles with MongoDB replication. We had two servers: one for the primary and one for the secondary. Simple, right? Well, not so much. Every time the secondary server decided to take a nap, the primary would throw in the towel too. It was a complete disaster, and I’ll admit&ndash;I got so frustrated that I just ripped the replication feature out entirely (not my proudest moment, but hey, desperate times).</p>
+<p>Fast forward to 2024, and I&rsquo;m still helping Indorelawan out at <a href="https://hyperjump.tech">Hyperjump</a>. This time around, I needed to set up an ELT system using Airbyte, and guess what? MongoDB replication is back on the table. But I’m older, wiser, and determined to get it right this time. So I did.</p>
+<h2 id="here-comes-the-tutorial">Here comes the tutorial</h2>
+<p>After scouring countless sources and banging my head against the wall a few times, I finally got it: you need three servers, not just two. The first two servers are for the primary and secondary, but the third one? That’s for the arbiter.</p>
+<p>According to the <a href="https://www.mongodb.com/docs/manual/core/replica-set-arbiter/">MongoDB docs</a>:</p>
+<blockquote>
+<p>&ldquo;In some circumstances (such as when you have a primary and a secondary, but cost constraints prohibit adding another secondary), you may choose to add an arbiter to your replica set. An arbiter participates in elections for primary but an arbiter does not have a copy of the data set and cannot become a primary.&rdquo;</p>
+</blockquote>
+<p>In plain English, if the primary server kicks the bucket, the arbiter steps in and says, “Hey, secondary, you’re in charge now!” The arbiter doesn’t store any data or do much heavy lifting, but it has the final say in who gets to be primary.</p>
+<p>Now that we&rsquo;ve got our three servers ready to roll, it&rsquo;s time for the execution. Before you proceed, don&rsquo;t forget to install MongoDB on each server. Please follow the official <a href="https://docs.mongodb.com">MongoDB installation guide</a> for your specific operating system.</p>
+<h3 id="step-1-modify-the-etchosts-file">Step 1: Modify the /etc/hosts file</h3>
+<p>The first thing you need to do is add these IP addresses to each server&rsquo;s /etc/hosts file. This step is crucial because it ensures that all three servers know how to find each other. So, on each server, you&rsquo;ll want to edit the /etc/hosts file and include the following lines:</p>
+<pre tabindex="0"><code>192.168.0.2 mongo-db1
+192.168.0.3 mongo-db2
+192.168.0.4 mongo-arbiter
+</code></pre><p>Remember, this setup needs to be the same on all three servers. And of course, swap out these IP addresses with the actual ones you&rsquo;re using in your environment.</p>
+<h3 id="step-2-modify-each-servers-etchostname">Step 2: Modify each server&rsquo;s /etc/hostname</h3>
+<p>Next up, let&rsquo;s make sure each server can be identified by a name rather than just an IP address. This makes things a lot more manageable and easier to remember. On each server, you&rsquo;ll want to rename the hostname accordingly:</p>
+<p>On the first server (192.168.0.2):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ sudo vim /etc/hostname
+</span></span></code></pre></div><p>Change the content to:</p>
+<pre tabindex="0"><code>mongo-db1
+</code></pre><p>On the second server (192.168.0.3):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ sudo vim /etc/hostname
+</span></span></code></pre></div><p>Change the content to:</p>
+<pre tabindex="0"><code>mongo-db2
+</code></pre><p>On the third server (192.168.0.4):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ sudo vim /etc/hostname
+</span></span></code></pre></div><p>Change the content to:</p>
+<pre tabindex="0"><code>mongo-arbiter
+</code></pre><p>This way, each server has a friendly name, making it easy to identify who&rsquo;s who in your MongoDB replica set.</p>
+<h3 id="step-3-generate-a-key-file">Step 3: Generate a key file</h3>
+<p>To allow the servers to communicate securely without needing an external passcode, we&rsquo;ll use a key file. This key will authenticate the servers with each other.</p>
+<p>Here&rsquo;s how you can generate the key on the first server (mongo-db1):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Create the directory for the keys</span>
+</span></span><span style="display:flex;"><span>mkdir -p /etc/mongodb/keys/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Generate the key file</span>
+</span></span><span style="display:flex;"><span>openssl rand -base64 <span style="color:#ae81ff">756</span> &gt; /etc/mongodb/keys/mongo-key
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Set the correct permissions to keep the key secure</span>
+</span></span><span style="display:flex;"><span>chmod <span style="color:#ae81ff">400</span> /etc/mongodb/keys/mongo-key
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Ensure the MongoDB user owns the key</span>
+</span></span><span style="display:flex;"><span>chown -R mongodb:mongodb /etc/mongodb
+</span></span></code></pre></div><p>Once the key is generated on mongo-db1, you&rsquo;ll need to copy this key file to the same location on all other servers (mongo-db2 and mongo-arbiter):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Example for copying the key to another node</span>
+</span></span><span style="display:flex;"><span>scp /etc/mongodb/keys/mongo-key user@mongo-db2:/etc/mongodb/keys/
+</span></span><span style="display:flex;"><span>scp /etc/mongodb/keys/mongo-key user@mongo-arbiter:/etc/mongodb/keys/
+</span></span></code></pre></div><p>This key ensures that all servers can securely communicate with each other.</p>
+<h3 id="step-4-configure-the-replica-set">Step 4: Configure the replica set</h3>
+<p>Now that you&rsquo;ve configured everything on the servers, there&rsquo;s one final step: adding the IP addresses of the servers and specifying the replication set name. You&rsquo;ll do this by modifying the MongoDB configuration file located at /etc/mongo.conf.</p>
+<p>On the first server (mongo-db1), open the configuration file and update it as follows:</p>
+<pre tabindex="0"><code># network interfaces
+net:
+  port: 27017
+  bindIp: 192.168.0.2
+
+# security settings
+security:
+  authorization: enabled
+  keyFile: /etc/mongodb/keys/mongo-key
+
+# replication settings
+replication:
+  replSetName: &#34;replicaset-01&#34;
+</code></pre><p>Repeat this process on the other two servers, ensuring that each server&rsquo;s configuration reflects its specific IP address. Once you&rsquo;ve made these changes on all the servers, restart the MongoDB services to apply the new configurations:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl restart mongod
+</span></span></code></pre></div><h3 id="step-5-initiate-the-replica-set">Step 5: Initiate the replica set</h3>
+<p>With everything configured, it&rsquo;s time to kick off the replication process. Start by logging into the primary server, 192.168.0.2:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ mongosh &lt;mongodb-connection-string&gt;
+</span></span></code></pre></div><p>Once you&rsquo;re in the MongoDB shell, initiate the replica set with the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&gt; rs.initiate<span style="color:#f92672">()</span>;
+</span></span></code></pre></div><p>This command tells MongoDB to start the replication process, setting up the primary and secondary servers along with the arbiter. Once the replication REPL is started, it’s time to add nodes to the replication set by the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&gt; rs.add<span style="color:#f92672">(</span>“mongo-db2:27017”<span style="color:#f92672">)</span>;
+</span></span><span style="display:flex;"><span>&gt; rs.add<span style="color:#f92672">(</span>“mongo-arbiter:27017”<span style="color:#f92672">)</span>;
+</span></span></code></pre></div><p>Once you add the servers, you will see the output as {‘ok’:1}, which indicates a successful addition of servers in the replica set.</p>
+<h3 id="step-6-verify-the-replica-set">Step 6: Verify the replica set</h3>
+<p>To check the status of your replication set and ensure everything is running smoothly, you can use the following command in the MongoDB shell:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&gt; rs.status<span style="color:#f92672">()</span>
+</span></span></code></pre></div><p>This command will give you a detailed overview of your replica set, including the state of each node. Here’s a sample output you might see:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">set:</span> <span style="color:#960050;background-color:#1e0010">&#39;replicaset-01&#39;,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">date:</span> <span style="color:#960050;background-color:#1e0010">ISODate(</span><span style="color:#f92672">&#34;2024-08-13T08:35:54.411Z&#34;</span><span style="color:#960050;background-color:#1e0010">)</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">myState:</span> <span style="color:#960050;background-color:#1e0010">1,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">...(omitted</span> <span style="color:#960050;background-color:#1e0010">for</span> <span style="color:#960050;background-color:#1e0010">brevity),</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">members:</span> <span style="color:#960050;background-color:#1e0010">[</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">_id:</span> <span style="color:#960050;background-color:#1e0010">0,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">name:</span> <span style="color:#960050;background-color:#1e0010">&#39;192.168.0.2:27017&#39;,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">health:</span> <span style="color:#960050;background-color:#1e0010">1,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">state:</span> <span style="color:#960050;background-color:#1e0010">1,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">stateStr:</span> <span style="color:#960050;background-color:#1e0010">&#39;PRIMARY&#39;,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">uptime:</span> <span style="color:#960050;background-color:#1e0010">2867565,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">optime:</span> <span style="color:#960050;background-color:#1e0010">{</span> <span style="color:#960050;background-color:#1e0010">ts:</span> <span style="color:#960050;background-color:#1e0010">Timestamp({</span> <span style="color:#960050;background-color:#1e0010">t:</span> <span style="color:#960050;background-color:#1e0010">1723538152,</span> <span style="color:#960050;background-color:#1e0010">i:</span> <span style="color:#960050;background-color:#1e0010">32</span> }<span style="color:#960050;background-color:#1e0010">),</span> <span style="color:#960050;background-color:#1e0010">t:</span> <span style="color:#960050;background-color:#1e0010">Long(</span><span style="color:#e6db74">&#34;40&#34;</span><span style="color:#960050;background-color:#1e0010">)</span> <span style="color:#960050;background-color:#1e0010">},</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">optimeDate:</span> <span style="color:#960050;background-color:#1e0010">ISODate(</span><span style="color:#e6db74">&#34;2024-08-13T08:35:52.000Z&#34;</span><span style="color:#960050;background-color:#1e0010">),</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">self:</span> <span style="color:#66d9ef">true</span><span style="color:#960050;background-color:#1e0010">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">},</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">_id:</span> <span style="color:#960050;background-color:#1e0010">1,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">name:</span> <span style="color:#960050;background-color:#1e0010">&#39;192.168.0.3:27017&#39;,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">health:</span> <span style="color:#960050;background-color:#1e0010">1,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">state:</span> <span style="color:#960050;background-color:#1e0010">2,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">stateStr:</span> <span style="color:#960050;background-color:#1e0010">&#39;SECONDARY&#39;,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">uptime:</span> <span style="color:#960050;background-color:#1e0010">2867554,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">optime:</span> <span style="color:#960050;background-color:#1e0010">{</span> <span style="color:#960050;background-color:#1e0010">ts:</span> <span style="color:#960050;background-color:#1e0010">Timestamp({</span> <span style="color:#960050;background-color:#1e0010">t:</span> <span style="color:#960050;background-color:#1e0010">1723538152,</span> <span style="color:#960050;background-color:#1e0010">i:</span> <span style="color:#960050;background-color:#1e0010">32</span> }<span style="color:#960050;background-color:#1e0010">),</span> <span style="color:#960050;background-color:#1e0010">t:</span> <span style="color:#960050;background-color:#1e0010">Long(</span><span style="color:#e6db74">&#34;40&#34;</span><span style="color:#960050;background-color:#1e0010">)</span> <span style="color:#960050;background-color:#1e0010">},</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">optimeDurable:</span> { <span style="color:#960050;background-color:#1e0010">ts:</span> <span style="color:#960050;background-color:#1e0010">Timestamp({</span> <span style="color:#960050;background-color:#1e0010">t:</span> <span style="color:#960050;background-color:#1e0010">1723538152,</span> <span style="color:#960050;background-color:#1e0010">i:</span> <span style="color:#960050;background-color:#1e0010">32</span> }<span style="color:#960050;background-color:#1e0010">),</span> <span style="color:#960050;background-color:#1e0010">t:</span> <span style="color:#960050;background-color:#1e0010">Long(</span><span style="color:#e6db74">&#34;40&#34;</span><span style="color:#960050;background-color:#1e0010">)</span> <span style="color:#960050;background-color:#1e0010">},</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">optimeDate:</span> <span style="color:#960050;background-color:#1e0010">ISODate(</span><span style="color:#e6db74">&#34;2024-08-13T08:35:52.000Z&#34;</span><span style="color:#960050;background-color:#1e0010">),</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">},</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">_id:</span> <span style="color:#960050;background-color:#1e0010">2,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">name:</span> <span style="color:#960050;background-color:#1e0010">&#39;192.168.0.4:27017&#39;,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">health:</span> <span style="color:#960050;background-color:#1e0010">1,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">state:</span> <span style="color:#960050;background-color:#1e0010">7,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">stateStr:</span> <span style="color:#960050;background-color:#1e0010">&#39;ARBITER&#39;,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">uptime:</span> <span style="color:#960050;background-color:#1e0010">2867407,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">lastHeartbeat:</span> <span style="color:#960050;background-color:#1e0010">ISODate(</span><span style="color:#f92672">&#34;2024-08-13T08:35:54.334Z&#34;</span><span style="color:#960050;background-color:#1e0010">)</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">lastHeartbeatRecv:</span> <span style="color:#960050;background-color:#1e0010">ISODate(</span><span style="color:#f92672">&#34;2024-08-13T08:35:54.136Z&#34;</span><span style="color:#960050;background-color:#1e0010">)</span>,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">],</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">ok:</span> <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">...(omitted</span> <span style="color:#960050;background-color:#1e0010">for</span> <span style="color:#960050;background-color:#1e0010">brevity),</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">}</span>
+</span></span></code></pre></div><p>In this output:</p>
+<ul>
+<li>&ldquo;stateStr&rdquo;: &ldquo;PRIMARY&rdquo; indicates that the server is the primary server.</li>
+<li>&ldquo;stateStr&rdquo;: &ldquo;SECONDARY&rdquo; shows that the server is acting as a secondary server.</li>
+<li>&ldquo;stateStr&rdquo;: &ldquo;ARBITER&rdquo; means the server is functioning as the arbiter.</li>
+</ul>
+<p>If everything looks good, your MongoDB replica set is officially up and running!</p>
+<h2 id="wrapping-it-up">Wrapping It Up</h2>
+<p>And there you have it! Your MongoDB replica set is now up and running. If the primary server decides to take an unscheduled vacation, your secondary server and arbiter will keep things from turning into a full-blown data disaster.</p>
+<p>It’s funny to look back and remember how MongoDB replication once felt like a nightmare. But with a bit of persistence and a lot of trial and error, I&rsquo;ve turned that challenge into a triumph.</p>
+<p>So, next time you’re tempted to disable replication, just remember: three servers are better than one, and they make sure your data doesn’t pull a Houdini act.</p>
+<p>And remember, if all else fails, there’s always coffee. Lots of coffee.</p>
+</section>
+
+  
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="http://localhost:1313/posts/finding-out-pain-points-in-postgresql/"
+      ><span>Finding Out Pain Points in Postgresql using pg_stat_statements</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2024
+    <a class="link" href="http://localhost:1313/">Denny Pradipta&#39;s Blog</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>
