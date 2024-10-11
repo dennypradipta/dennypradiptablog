@@ -6,8 +6,15 @@
     <description>Recent content on Denny Pradipta&#39;s Blog</description>
     <generator>Hugo 0.125.2</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 13 Aug 2024 15:05:40 +0700</lastBuildDate>
+    <lastBuildDate>Fri, 11 Oct 2024 15:34:01 +0700</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Finally Managed to Get Redis Replication Working</title>
+      <link>http://localhost:1313/posts/finally-managed-to-get-redis-replication-working/</link>
+      <pubDate>Fri, 11 Oct 2024 15:34:01 +0700</pubDate>
+      <guid>http://localhost:1313/posts/finally-managed-to-get-redis-replication-working/</guid>
+      <description>So I was trying to set up Redis replication with Redis Sentinel. I had this plan involving five servers:&#xA;10.10.10.1 - Master 10.10.10.2 - Slave 10.10.10.3, 10.10.10.4, 10.10.10.5 - Sentinels Redis Sentinels are responsible for monitoring the health of the Redis master and slaves. If the master goes down, the sentinel will promote a slave to be the new master. If a slave goes down, the sentinel will promote a new slave to take its place.</description>
+    </item>
     <item>
       <title>So That&#39;s How You Do MongoDB Replication!</title>
       <link>http://localhost:1313/posts/so-thats-how-you-do-mongodb-replication/</link>

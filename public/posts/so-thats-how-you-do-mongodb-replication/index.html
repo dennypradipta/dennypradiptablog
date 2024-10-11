@@ -352,55 +352,55 @@ replication:
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&gt; rs.initiate<span style="color:#f92672">()</span>;
 </span></span></code></pre></div><p>This command tells MongoDB to start the replication process, setting up the primary and secondary servers along with the arbiter. Once the replication REPL is started, it’s time to add nodes to the replication set by the following command:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&gt; rs.add<span style="color:#f92672">(</span>“mongo-db2:27017”<span style="color:#f92672">)</span>;
-</span></span><span style="display:flex;"><span>&gt; rs.add<span style="color:#f92672">(</span>“mongo-arbiter:27017”<span style="color:#f92672">)</span>;
+</span></span><span style="display:flex;"><span>&gt; rs.addArb<span style="color:#f92672">(</span>“mongo-arbiter:27017”<span style="color:#f92672">)</span>;
 </span></span></code></pre></div><p>Once you add the servers, you will see the output as {‘ok’:1}, which indicates a successful addition of servers in the replica set.</p>
 <h3 id="step-6-verify-the-replica-set">Step 6: Verify the replica set</h3>
 <p>To check the status of your replication set and ensure everything is running smoothly, you can use the following command in the MongoDB shell:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&gt; rs.status<span style="color:#f92672">()</span>
 </span></span></code></pre></div><p>This command will give you a detailed overview of your replica set, including the state of each node. Here’s a sample output you might see:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">set:</span> <span style="color:#960050;background-color:#1e0010">&#39;replicaset-01&#39;,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">date:</span> <span style="color:#960050;background-color:#1e0010">ISODate(</span><span style="color:#f92672">&#34;2024-08-13T08:35:54.411Z&#34;</span><span style="color:#960050;background-color:#1e0010">)</span>,
-</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">myState:</span> <span style="color:#960050;background-color:#1e0010">1,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">...(omitted</span> <span style="color:#960050;background-color:#1e0010">for</span> <span style="color:#960050;background-color:#1e0010">brevity),</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">members:</span> <span style="color:#960050;background-color:#1e0010">[</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">{</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">_id:</span> <span style="color:#960050;background-color:#1e0010">0,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">name:</span> <span style="color:#960050;background-color:#1e0010">&#39;192.168.0.2:27017&#39;,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">health:</span> <span style="color:#960050;background-color:#1e0010">1,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">state:</span> <span style="color:#960050;background-color:#1e0010">1,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">stateStr:</span> <span style="color:#960050;background-color:#1e0010">&#39;PRIMARY&#39;,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">uptime:</span> <span style="color:#960050;background-color:#1e0010">2867565,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">optime:</span> <span style="color:#960050;background-color:#1e0010">{</span> <span style="color:#960050;background-color:#1e0010">ts:</span> <span style="color:#960050;background-color:#1e0010">Timestamp({</span> <span style="color:#960050;background-color:#1e0010">t:</span> <span style="color:#960050;background-color:#1e0010">1723538152,</span> <span style="color:#960050;background-color:#1e0010">i:</span> <span style="color:#960050;background-color:#1e0010">32</span> }<span style="color:#960050;background-color:#1e0010">),</span> <span style="color:#960050;background-color:#1e0010">t:</span> <span style="color:#960050;background-color:#1e0010">Long(</span><span style="color:#e6db74">&#34;40&#34;</span><span style="color:#960050;background-color:#1e0010">)</span> <span style="color:#960050;background-color:#1e0010">},</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">optimeDate:</span> <span style="color:#960050;background-color:#1e0010">ISODate(</span><span style="color:#e6db74">&#34;2024-08-13T08:35:52.000Z&#34;</span><span style="color:#960050;background-color:#1e0010">),</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">self:</span> <span style="color:#66d9ef">true</span><span style="color:#960050;background-color:#1e0010">,</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">},</span>
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">_id:</span> <span style="color:#960050;background-color:#1e0010">1,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">name:</span> <span style="color:#960050;background-color:#1e0010">&#39;192.168.0.3:27017&#39;,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">health:</span> <span style="color:#960050;background-color:#1e0010">1,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">state:</span> <span style="color:#960050;background-color:#1e0010">2,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">stateStr:</span> <span style="color:#960050;background-color:#1e0010">&#39;SECONDARY&#39;,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">uptime:</span> <span style="color:#960050;background-color:#1e0010">2867554,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">optime:</span> <span style="color:#960050;background-color:#1e0010">{</span> <span style="color:#960050;background-color:#1e0010">ts:</span> <span style="color:#960050;background-color:#1e0010">Timestamp({</span> <span style="color:#960050;background-color:#1e0010">t:</span> <span style="color:#960050;background-color:#1e0010">1723538152,</span> <span style="color:#960050;background-color:#1e0010">i:</span> <span style="color:#960050;background-color:#1e0010">32</span> }<span style="color:#960050;background-color:#1e0010">),</span> <span style="color:#960050;background-color:#1e0010">t:</span> <span style="color:#960050;background-color:#1e0010">Long(</span><span style="color:#e6db74">&#34;40&#34;</span><span style="color:#960050;background-color:#1e0010">)</span> <span style="color:#960050;background-color:#1e0010">},</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">optimeDurable:</span> { <span style="color:#960050;background-color:#1e0010">ts:</span> <span style="color:#960050;background-color:#1e0010">Timestamp({</span> <span style="color:#960050;background-color:#1e0010">t:</span> <span style="color:#960050;background-color:#1e0010">1723538152,</span> <span style="color:#960050;background-color:#1e0010">i:</span> <span style="color:#960050;background-color:#1e0010">32</span> }<span style="color:#960050;background-color:#1e0010">),</span> <span style="color:#960050;background-color:#1e0010">t:</span> <span style="color:#960050;background-color:#1e0010">Long(</span><span style="color:#e6db74">&#34;40&#34;</span><span style="color:#960050;background-color:#1e0010">)</span> <span style="color:#960050;background-color:#1e0010">},</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">optimeDate:</span> <span style="color:#960050;background-color:#1e0010">ISODate(</span><span style="color:#e6db74">&#34;2024-08-13T08:35:52.000Z&#34;</span><span style="color:#960050;background-color:#1e0010">),</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">},</span>
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">_id:</span> <span style="color:#960050;background-color:#1e0010">2,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">name:</span> <span style="color:#960050;background-color:#1e0010">&#39;192.168.0.4:27017&#39;,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">health:</span> <span style="color:#960050;background-color:#1e0010">1,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">state:</span> <span style="color:#960050;background-color:#1e0010">7,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">stateStr:</span> <span style="color:#960050;background-color:#1e0010">&#39;ARBITER&#39;,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">uptime:</span> <span style="color:#960050;background-color:#1e0010">2867407,</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">lastHeartbeat:</span> <span style="color:#960050;background-color:#1e0010">ISODate(</span><span style="color:#f92672">&#34;2024-08-13T08:35:54.334Z&#34;</span><span style="color:#960050;background-color:#1e0010">)</span>,
-</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">lastHeartbeatRecv:</span> <span style="color:#960050;background-color:#1e0010">ISODate(</span><span style="color:#f92672">&#34;2024-08-13T08:35:54.136Z&#34;</span><span style="color:#960050;background-color:#1e0010">)</span>,
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">],</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">ok:</span> <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">...(omitted</span> <span style="color:#960050;background-color:#1e0010">for</span> <span style="color:#960050;background-color:#1e0010">brevity),</span>
-</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">}</span>
-</span></span></code></pre></div><p>In this output:</p>
+<pre tabindex="0"><code>{
+  set: &#39;replicaset-01&#39;,
+  date: ISODate(&#34;2024-08-13T08:35:54.411Z&#34;),
+  myState: 1,
+  ...(omitted for brevity),
+  members: [
+    {
+      _id: 0,
+      name: &#39;192.168.0.2:27017&#39;,
+      health: 1,
+      state: 1,
+      stateStr: &#39;PRIMARY&#39;,
+      uptime: 2867565,
+      optime: { ts: Timestamp({ t: 1723538152, i: 32 }), t: Long(&#34;40&#34;) },
+      optimeDate: ISODate(&#34;2024-08-13T08:35:52.000Z&#34;),
+      self: true,
+    },
+    {
+      _id: 1,
+      name: &#39;192.168.0.3:27017&#39;,
+      health: 1,
+      state: 2,
+      stateStr: &#39;SECONDARY&#39;,
+      uptime: 2867554,
+      optime: { ts: Timestamp({ t: 1723538152, i: 32 }), t: Long(&#34;40&#34;) },
+      optimeDurable: { ts: Timestamp({ t: 1723538152, i: 32 }), t: Long(&#34;40&#34;) },
+      optimeDate: ISODate(&#34;2024-08-13T08:35:52.000Z&#34;),
+    },
+    {
+      _id: 2,
+      name: &#39;192.168.0.4:27017&#39;,
+      health: 1,
+      state: 7,
+      stateStr: &#39;ARBITER&#39;,
+      uptime: 2867407,
+      lastHeartbeat: ISODate(&#34;2024-08-13T08:35:54.334Z&#34;),
+      lastHeartbeatRecv: ISODate(&#34;2024-08-13T08:35:54.136Z&#34;),
+    }
+  ],
+  ok: 1,
+  ...(omitted for brevity),
+}
+</code></pre><p>In this output:</p>
 <ul>
 <li>&ldquo;stateStr&rdquo;: &ldquo;PRIMARY&rdquo; indicates that the server is the primary server.</li>
 <li>&ldquo;stateStr&rdquo;: &ldquo;SECONDARY&rdquo; shows that the server is acting as a secondary server.</li>
@@ -422,6 +422,12 @@ replication:
   
   
   <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="http://localhost:1313/posts/finally-managed-to-get-redis-replication-working/"
+      ><span class="mr-1.5">←</span><span>Finally Managed to Get Redis Replication Working</span></a
+    >
     
     
     <a
