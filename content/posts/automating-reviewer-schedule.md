@@ -135,3 +135,5 @@ jobs:
 - **Transparency**: By using Microsoft Teams, no one gets left behind and keeps everyone in the loop.
 
 This script and workflow setup have significantly simplified our daily review assignment process, allowing the team to focus more on core development tasks rather than administrative overhead.
+
+And remember, if all else fails, there’s always coffee. Lots of coffee.
