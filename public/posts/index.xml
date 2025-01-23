@@ -2,45 +2,52 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Denny Pradipta&#39;s Blog</title>
-    <link>https://dennypradiptablog.vercel.app/posts/</link>
+    <link>http://localhost:1313/posts/</link>
     <description>Recent content in Posts on Denny Pradipta&#39;s Blog</description>
     <generator>Hugo 0.125.2</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 16 Oct 2024 11:07:33 +0700</lastBuildDate>
-    <atom:link href="https://dennypradiptablog.vercel.app/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 23 Jan 2025 21:43:34 +0700</lastBuildDate>
+    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>I Just Learned How &#34;SameSite&#34; Property in Cookies Work</title>
+      <link>http://localhost:1313/posts/i-just-learned-how-samesite-property-in-cookies-work/</link>
+      <pubDate>Thu, 23 Jan 2025 21:43:34 +0700</pubDate>
+      <guid>http://localhost:1313/posts/i-just-learned-how-samesite-property-in-cookies-work/</guid>
+      <description>Happy New Year!&#xA;Recently, I have been busy with not one, but two Next.js projects and a Node.js backend built with Fastify. The setup is straightforward: one Next.js app serves as a dashboard for admins, while the other is a front-facing site for end-users. Just another day at the office.&#xA;Just like you imagined, all business logic, authentication, and data fetching, happens on the backend. Both Next.js apps rely heavily on the Fastify server to fetch data, manage user sessions, and basically handle everything behind the scenes.</description>
+    </item>
     <item>
       <title>Compressing PDF Files using Ghostscript is Fascinating</title>
-      <link>https://dennypradiptablog.vercel.app/posts/compressing-pdf-files-using-ghostscript-is-fascinating/</link>
+      <link>http://localhost:1313/posts/compressing-pdf-files-using-ghostscript-is-fascinating/</link>
       <pubDate>Wed, 16 Oct 2024 11:07:33 +0700</pubDate>
-      <guid>https://dennypradiptablog.vercel.app/posts/compressing-pdf-files-using-ghostscript-is-fascinating/</guid>
+      <guid>http://localhost:1313/posts/compressing-pdf-files-using-ghostscript-is-fascinating/</guid>
       <description>My wife was applying for a job online, she needed to upload her portfolio as part of the application process. The website had a file size limit of 10MB, but her PDF was a whopping 30MB. I searched all over the internet for a PDF compressor. I tried almost every PDF compressor in the Google Search&amp;rsquo;s first page, but none of them are quite my tempo. If they managed to shrink the file at all, the quality would drop so badly it looked like a pixelated mess.</description>
     </item>
     <item>
       <title>Finally Managed to Get Redis Replication Working</title>
-      <link>https://dennypradiptablog.vercel.app/posts/finally-managed-to-get-redis-replication-working/</link>
+      <link>http://localhost:1313/posts/finally-managed-to-get-redis-replication-working/</link>
       <pubDate>Fri, 11 Oct 2024 15:34:01 +0700</pubDate>
-      <guid>https://dennypradiptablog.vercel.app/posts/finally-managed-to-get-redis-replication-working/</guid>
+      <guid>http://localhost:1313/posts/finally-managed-to-get-redis-replication-working/</guid>
       <description>So I was trying to set up Redis replication with Redis Sentinel. I had this plan involving five servers:&#xA;10.10.10.1 - Master 10.10.10.2 - Slave 10.10.10.3, 10.10.10.4, 10.10.10.5 - Sentinels Redis Sentinels are responsible for monitoring the health of the Redis master and slaves. If the master goes down, the sentinel will promote a slave to be the new master. If a slave goes down, the sentinel will promote a new slave to take its place.</description>
     </item>
     <item>
       <title>So That&#39;s How You Do MongoDB Replication!</title>
-      <link>https://dennypradiptablog.vercel.app/posts/so-thats-how-you-do-mongodb-replication/</link>
+      <link>http://localhost:1313/posts/so-thats-how-you-do-mongodb-replication/</link>
       <pubDate>Tue, 13 Aug 2024 15:05:40 +0700</pubDate>
-      <guid>https://dennypradiptablog.vercel.app/posts/so-thats-how-you-do-mongodb-replication/</guid>
+      <guid>http://localhost:1313/posts/so-thats-how-you-do-mongodb-replication/</guid>
       <description>When I first joined Indorelawan as a fresh-faced graduate, I had my fair share of battles with MongoDB replication. We had two servers: one for the primary and one for the secondary. Simple, right? Well, not so much. Every time the secondary server decided to take a nap, the primary would throw in the towel too. It was a complete disaster, and I’ll admit&amp;ndash;I got so frustrated that I just ripped the replication feature out entirely (not my proudest moment, but hey, desperate times).</description>
     </item>
     <item>
       <title>Finding Out Pain Points in Postgresql using pg_stat_statements</title>
-      <link>https://dennypradiptablog.vercel.app/posts/finding-out-pain-points-in-postgresql/</link>
+      <link>http://localhost:1313/posts/finding-out-pain-points-in-postgresql/</link>
       <pubDate>Tue, 16 Jul 2024 15:10:04 +0700</pubDate>
-      <guid>https://dennypradiptablog.vercel.app/posts/finding-out-pain-points-in-postgresql/</guid>
+      <guid>http://localhost:1313/posts/finding-out-pain-points-in-postgresql/</guid>
       <description>Alright, let&amp;rsquo;s face it: as much as we love PostgreSQL, it can sometimes feel like finding the source of your database&amp;rsquo;s performance issues is like finding a needle in a haystack. But what if I told you there&amp;rsquo;s an extension in your PostgreSQL toolbox that can help you identify and fix these pain points? Enter pg_stat_statements.&#xA;What is pg_stat_statements? It&amp;rsquo;s an extension that collects and displays statistics about SQL queries executed by your database.</description>
     </item>
     <item>
       <title>Automating Reviewer Assignments for NEO Sense and Monika</title>
-      <link>https://dennypradiptablog.vercel.app/posts/automating-reviewer-schedule/</link>
+      <link>http://localhost:1313/posts/automating-reviewer-schedule/</link>
       <pubDate>Tue, 14 May 2024 15:55:00 +0700</pubDate>
-      <guid>https://dennypradiptablog.vercel.app/posts/automating-reviewer-schedule/</guid>
+      <guid>http://localhost:1313/posts/automating-reviewer-schedule/</guid>
       <description>In Hyperjump, we handle two main projects: NEO Sense and Monika. Each day, we get assigned to review pull requests for these projects. To ensure fairness and randomness, at the start of every month, our team lead randomize the assignments, making sure each project has two reviewers, and no one is assigned to both projects on the same day. Our team lead used to manage this process manually in Excel, which was a pain the ass I&amp;rsquo;m sure.</description>
     </item>
   </channel>

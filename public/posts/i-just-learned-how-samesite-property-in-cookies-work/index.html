@@ -1,0 +1,411 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en-us"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>I Just Learned How &#34;SameSite&#34; Property in Cookies Work - Denny Pradipta&#39;s Blog</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Happy New Year!
+Recently, I have been busy with not one, but two Next.js projects and a Node.js backend built with Fastify. The setup is straightforward: one Next.js app serves as a dashboard for admins, while the other is a front-facing site for end-users. Just another day at the office.
+Just like you imagined, all business logic, authentication, and data fetching, happens on the backend. Both Next.js apps rely heavily on the Fastify server to fetch data, manage user sessions, and basically handle everything behind the scenes." />
+  <meta name="author" content="Denny Pradipta" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://www.gravatar.com/avatar/ff5b63b23c720aa45589e3ef304c4936?s=160&amp;d=identicon" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/twitter.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/github.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/linkedin.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/rss.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link rel="icon" href="http://localhost:1313/favicon.ico" />
+  <link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.125.2">
+
+  
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="http://localhost:1313/"
+      >Denny Pradipta&#39;s Blog</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/dennypradipta_"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/dennypradipta"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/dennypradipta"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./rss.svg)"
+        href="http://localhost:1313/index.xml"
+        target="_blank"
+        rel="alternate"
+      >
+        rss
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">I Just Learned How &#34;SameSite&#34; Property in Cookies Work</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Jan 23, 2025</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><p>Happy New Year!</p>
+<p>Recently, I have been busy with not one, but two Next.js projects and a Node.js backend built with Fastify. The setup is straightforward: one Next.js app serves as a dashboard for admins, while the other is a front-facing site for end-users. Just another day at the office.</p>
+<p>Just like you imagined, all business logic, authentication, and data fetching, happens on the backend. Both Next.js apps rely heavily on the Fastify server to fetch data, manage user sessions, and basically handle everything behind the scenes.</p>
+<p>As I was setting up authentication across these projects, I stumbled upon some problem.</p>
+<h2 id="what-the-hell">What the hell?</h2>
+<p>Before we getting deeper, let me paint you a picture of the current setup.</p>
+<p>For this project, I’ve got everything running smoothly under the same domain, let&rsquo;s just say the domain is nicelydone.com. Here’s how it’s structured:</p>
+<ul>
+<li>The API is served at api.nicelydone.com.</li>
+<li>The frontend is served at nicelydone.com.</li>
+<li>The dashboard is served at dashboard.nicelydone.com.</li>
+</ul>
+<p>The backend, built on Fastify, handles authentication via a function I wrote to set cookies when a user logs in. Here’s the function:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setTokenCookie</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">maxAgeSeconds</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">name</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">value</span>,
+</span></span><span style="display:flex;"><span>}<span style="color:#f92672">:</span> <span style="color:#a6e22e">SetTokenCookieParameters</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">setCookie</span>(<span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">value</span>, {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">httpOnly</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">secure</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">sameSite</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;strict&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">path</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;/&#34;</span>,
+</span></span><span style="display:flex;"><span>    ...(<span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">cookie</span>.<span style="color:#a6e22e">useExplicitDomain</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">?</span> {
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">domain</span>: <span style="color:#66d9ef">config.server.cookie.domain</span>,
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">:</span> {}),
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">maxAge</span>: <span style="color:#66d9ef">maxAgeSeconds</span>,
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Same shit, different day. This function sets a cookie on the backend during user login, whether they’re logging in through basic email/password authentication or via OAuth2, in this case Gogole.</p>
+<p>Now, here’s where it gets interesting: for plain old authentication, everything works like a charm. The user logs in, and their session gets reflected seamlessly on both the frontend (nicelydone.com) and the dashboard (dashboard.nicelydone.com).</p>
+<p>But when it comes to Sign in via Google, it behaves differently. After successfully logging in with, say, Google, the cookie is set—but neither the frontend nor the dashboard shows the current logged-in user immediately. Instead, I have to refresh the page ONCE before I can see the current logged-in user.</p>
+<p>The first thing that comes to mind is that I forgot to set the Cookie domain. Nope, that’s not it. I made sure of that. I tried to convince myself this is just a localhost problem, but it also happens on the staging server.</p>
+<h2 id="so-i-keep-digging">So I Keep Digging&hellip;</h2>
+<p>I tried to debug the issue by setting the <code>httpOnly</code> to false, because my undestanding is that Next.js can not access the cookie via client-side JavaScript. But then I remember I use Next.js App Router, so I am sure I used it via server-side. Pass.</p>
+<p>Tried to set the <code>secure</code> to false, but then I remember I use HTTPS. Pass.</p>
+<p>Tried to set the <code>sameSite</code> to <code>lax</code>. <strong>IT WORKS!</strong></p>
+<p>So I changed it to <code>lax</code>, pushes it to the staging server, and voila. After logging in with Google, the cookie is set, and the user is reflected on both the frontend and the dashboard. No more refreshes, no more headaches.</p>
+<p>Now that makes me wonder, why is this happening? Without further ado, time to <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie#samesitesamesite-value">RTFM</a>.</p>
+<h2 id="why-use-samesite-lax">Why Use <code>sameSite: 'lax'</code>?</h2>
+<p>Let&rsquo;s take a look at the SameSite attribute. There are three available values: <code>Strict</code>, <code>Lax</code>, and <code>None</code>. Now these values behave differently.</p>
+<ol>
+<li><code>sameSite: 'strict'</code></li>
+</ol>
+<ul>
+<li>Cookies are only sent for requests originating from the same site.</li>
+<li>Example: If your domain is nicelydone.com, the cookie will only be sent for requests to nicelydone.com and its subdomains, like dashboard.nicelydone.com.</li>
+<li>Drawback: Cross-origin requests, such as those initiated during an OAuth2 login flow (where Google redirects back to your site), won’t include the cookie. That’s why the logged-in state wasn’t reflected immediately after logging in with Google.</li>
+</ul>
+<ol start="2">
+<li><code>sameSite: 'lax'</code></li>
+</ol>
+<ul>
+<li>Cookies are sent with requests made from the same site and for “safe” cross-site requests, such as GET requests and certain top-level navigations (e.g., when Google redirects back to your site after OAuth2 login).</li>
+<li>Why It Works: When Google redirects the user back to your site (e.g., nicelydone.com), the browser sends the cookie along with the request because this redirect qualifies as a “safe” request. That’s why the frontend and dashboard reflected the user immediately after logging in with Google.</li>
+<li>Best Use Case: Authentication flows and scenarios where you need to support cross-origin navigation while still maintaining some security.</li>
+</ul>
+<ol start="3">
+<li><code>sameSite: 'none'</code></li>
+</ol>
+<ul>
+<li>Cookies are sent with all requests, including cross-origin ones.</li>
+<li>Caveat: This setting requires the secure flag to be enabled (the cookie must be sent over HTTPS). It’s the least restrictive option, but it’s also the riskiest because it leaves your cookies vulnerable to cross-site request forgery (CSRF) attacks.</li>
+<li>Best Use Case: Third-party cookies or when your app genuinely requires cookies to be sent with all types of cross-origin requests.</li>
+</ul>
+<p>With that in mind, switching to <code>lax</code> solved the problem.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>By simply switching from <code>strict</code> to <code>lax</code>, I was able to ensure that the Sign in via Google works smoothly in the dashboard and the frontend. No more refreshes. Nada. Moral of the story? Always RTFM. You might just save yourself hours of frustration.</p>
+<p>And remember, if all else fails, there’s always coffee. Lots of coffee.</p>
+</section>
+
+  
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="http://localhost:1313/posts/compressing-pdf-files-using-ghostscript-is-fascinating/"
+      ><span>Compressing PDF Files using Ghostscript is Fascinating</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2025
+    <a class="link" href="http://localhost:1313/">Denny Pradipta&#39;s Blog</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>
