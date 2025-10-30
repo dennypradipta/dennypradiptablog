@@ -51,7 +51,7 @@
   style="--bg: #faf8f1"
   lang="en-us"
 >
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta
@@ -83,14 +83,14 @@
   
   
   
-  <link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+  <link rel="preload stylesheet" as="style" href="https://dennypradiptablog.vercel.app/main.min.css" />
 
   
   
   
   
   
-  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+  <link rel="preload" as="image" href="https://dennypradiptablog.vercel.app/theme.png" />
 
   
   
@@ -102,31 +102,140 @@
 
   
   
-  <link rel="preload" as="image" href="http://localhost:1313/twitter.svg" />
+  <link rel="preload" as="image" href="https://dennypradiptablog.vercel.app/twitter.svg" />
   
-  <link rel="preload" as="image" href="http://localhost:1313/github.svg" />
+  <link rel="preload" as="image" href="https://dennypradiptablog.vercel.app/github.svg" />
   
-  <link rel="preload" as="image" href="http://localhost:1313/linkedin.svg" />
+  <link rel="preload" as="image" href="https://dennypradiptablog.vercel.app/linkedin.svg" />
   
-  <link rel="preload" as="image" href="http://localhost:1313/rss.svg" />
-  
-  
-
+  <link rel="preload" as="image" href="https://dennypradiptablog.vercel.app/rss.svg" />
   
   
 
   
   
+
+  
+  
   
 
   
-  <link rel="icon" href="http://localhost:1313/favicon.ico" />
-  <link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png" />
+  <link rel="icon" href="https://dennypradiptablog.vercel.app/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://dennypradiptablog.vercel.app/apple-touch-icon.png" />
 
   
   <meta name="generator" content="Hugo 0.125.2">
 
   
+  
+  
+  
+  
+
+
+  
+  
+  <meta itemprop="name" content="Denny Pradipta&#39;s Blog">
+  <meta itemprop="dateModified" content="2025-10-30T15:59:48+07:00">
+  
+  <meta property="og:url" content="https://dennypradiptablog.vercel.app/">
+  <meta property="og:site_name" content="Denny Pradipta&#39;s Blog">
+  <meta property="og:title" content="Denny Pradipta&#39;s Blog">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="website">
+
+  
+  <meta name="twitter:card" content="summary"><meta name="twitter:title" content="Denny Pradipta&#39;s Blog">
+<meta name="twitter:description" content="">
+
+  <div id="cookie-notice">
+    <span>We would like to use third party cookies and scripts to improve the 
+    functionality of this website.</span>
+    <div class="button-wrapper">
+    <a id="cookie-notice-accept">Approve</a>
+    <a id="cookie-notice-deny">Deny</a>
+    </div>
+</div>
+<script>
+    function createCookie(name,value,days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days*24*60*60*1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    }
+    function eraseCookie(name) {
+        createCookie(name,"",-1);
+    }
+
+    if(readCookie('cookie-notice-option')=='true') {
+        
+        
+        function loadScriptAsync(scriptSrc, callback) {
+            if (typeof callback !== 'function') {
+                throw new Error('Not a valid callback for async script load');
+            }
+            var script = document.createElement('script');
+            script.onload = callback;
+            script.src = scriptSrc;
+            document.head.appendChild(script);
+        }
+
+        
+
+        loadScriptAsync('https://www.googletagmanager.com/gtag/js?id=G-G47E23TVEG', function () {
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', 'G-XXXXXXXXXX', { 'anonymize_ip': true }); 
+        })
+
+        
+    } else if (readCookie('cookie-notice-option')!='false'){
+        document.getElementById('cookie-notice').style.display = 'flex';
+        setTimeout(() =>{
+          document.getElementById("cookie-notice").classList.toggle('is-loaded')
+        }
+        , 1000);
+        
+    }
+
+    document.getElementById('cookie-notice-accept').addEventListener("click",function() {
+        createCookie('cookie-notice-option','true',31);
+        document.getElementById('cookie-notice').style.display = 'none';
+        location.reload();
+    });
+
+    document.getElementById('cookie-notice-deny').addEventListener("click",function() {
+        createCookie('cookie-notice-option','false',31);
+        document.getElementById('cookie-notice').style.display = 'none';
+        location.reload();
+    });
+
+</script>
+  
+  
+  <link
+    rel="alternate"
+    type="application/rss&#43;xml"
+    href="https://dennypradiptablog.vercel.app/index.xml"
+    title="Denny Pradipta&#39;s Blog"
+  />
+  
+  
+  <link rel="canonical" href="https://dennypradiptablog.vercel.app/" />
   
   
 </head>
@@ -136,7 +245,7 @@
   <div class="relative z-50 mr-auto flex items-center">
     <a
       class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
-      href="http://localhost:1313/"
+      href="https://dennypradiptablog.vercel.app/"
       >Denny Pradipta&#39;s Blog</a
     >
     <div
@@ -241,7 +350,7 @@
       <a
         class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
         style="--url: url(./rss.svg)"
-        href="http://localhost:1313/index.xml"
+        href="https://dennypradiptablog.vercel.app/index.xml"
         target="_blank"
         rel="alternate"
       >
@@ -303,11 +412,24 @@
 
 <section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0">
   
+  <h2 class="!my-0 pb-1 font-bold !leading-none">Scrolling in Shadcn&#39;s Sheet Component Sucks</h2>
+  <time class="text-sm antialiased opacity-60"
+    >Oct 30, 2025</time
+  >
+  <a class="absolute inset-0 text-[0]" href="https://dennypradiptablog.vercel.app/posts/shadcn-scrolling-in-sheet-component-sucks/">Scrolling in Shadcn&#39;s Sheet Component Sucks</a>
+</section>
+
+
+
+
+
+<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0">
+  
   <h2 class="!my-0 pb-1 font-bold !leading-none">I Just Learned How &#34;SameSite&#34; Property in Cookies Work</h2>
   <time class="text-sm antialiased opacity-60"
     >Jan 23, 2025</time
   >
-  <a class="absolute inset-0 text-[0]" href="http://localhost:1313/posts/i-just-learned-how-samesite-property-in-cookies-work/">I Just Learned How &#34;SameSite&#34; Property in Cookies Work</a>
+  <a class="absolute inset-0 text-[0]" href="https://dennypradiptablog.vercel.app/posts/i-just-learned-how-samesite-property-in-cookies-work/">I Just Learned How &#34;SameSite&#34; Property in Cookies Work</a>
 </section>
 
 
@@ -320,7 +442,7 @@
   <time class="text-sm antialiased opacity-60"
     >Oct 16, 2024</time
   >
-  <a class="absolute inset-0 text-[0]" href="http://localhost:1313/posts/compressing-pdf-files-using-ghostscript-is-fascinating/">Compressing PDF Files using Ghostscript is Fascinating</a>
+  <a class="absolute inset-0 text-[0]" href="https://dennypradiptablog.vercel.app/posts/compressing-pdf-files-using-ghostscript-is-fascinating/">Compressing PDF Files using Ghostscript is Fascinating</a>
 </section>
 
 
@@ -333,7 +455,7 @@
   <time class="text-sm antialiased opacity-60"
     >Oct 11, 2024</time
   >
-  <a class="absolute inset-0 text-[0]" href="http://localhost:1313/posts/finally-managed-to-get-redis-replication-working/">Finally Managed to Get Redis Replication Working</a>
+  <a class="absolute inset-0 text-[0]" href="https://dennypradiptablog.vercel.app/posts/finally-managed-to-get-redis-replication-working/">Finally Managed to Get Redis Replication Working</a>
 </section>
 
 
@@ -346,7 +468,7 @@
   <time class="text-sm antialiased opacity-60"
     >Aug 13, 2024</time
   >
-  <a class="absolute inset-0 text-[0]" href="http://localhost:1313/posts/so-thats-how-you-do-mongodb-replication/">So That&#39;s How You Do MongoDB Replication!</a>
+  <a class="absolute inset-0 text-[0]" href="https://dennypradiptablog.vercel.app/posts/so-thats-how-you-do-mongodb-replication/">So That&#39;s How You Do MongoDB Replication!</a>
 </section>
 
 
@@ -359,7 +481,7 @@
   <time class="text-sm antialiased opacity-60"
     >Jul 16, 2024</time
   >
-  <a class="absolute inset-0 text-[0]" href="http://localhost:1313/posts/finding-out-pain-points-in-postgresql/">Finding Out Pain Points in Postgresql using pg_stat_statements</a>
+  <a class="absolute inset-0 text-[0]" href="https://dennypradiptablog.vercel.app/posts/finding-out-pain-points-in-postgresql/">Finding Out Pain Points in Postgresql using pg_stat_statements</a>
 </section>
 
 
@@ -372,7 +494,7 @@
   <time class="text-sm antialiased opacity-60"
     >May 14, 2024</time
   >
-  <a class="absolute inset-0 text-[0]" href="http://localhost:1313/posts/automating-reviewer-schedule/">Automating Reviewer Assignments for NEO Sense and Monika</a>
+  <a class="absolute inset-0 text-[0]" href="https://dennypradiptablog.vercel.app/posts/automating-reviewer-schedule/">Automating Reviewer Assignments for NEO Sense and Monika</a>
 </section>
 
 
@@ -387,7 +509,7 @@
 >
   <div class="mr-auto">
     &copy; 2025
-    <a class="link" href="http://localhost:1313/">Denny Pradipta&#39;s Blog</a>
+    <a class="link" href="https://dennypradiptablog.vercel.app/">Denny Pradipta&#39;s Blog</a>
   </div>
   <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
     >Powered by Hugo️️</a
